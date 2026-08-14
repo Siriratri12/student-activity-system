@@ -275,18 +275,31 @@ function ActivityRegister() {
   // Popup OK
   // ========================================
 
+  // const handleModalOk = () => {
+  //   console.log("กดตกลงแล้ว");
+  //   console.log("modal.type =", modal.type);
+  //   console.log("activity id =", id);
+
+  //   if (modal.type === "success") {
+  //     const targetUrl = `http://localhost:5173/activities/${id}/registrations`;
+
+  //     console.log("กำลังไป =", targetUrl);
+
+  //     window.location.replace(targetUrl);
+
+  //     return;
+  //   }
+
+  //   setModal({
+  //     open: false,
+  //     type: "error",
+  //     message: "",
+  //   });
+  // };
+
   const handleModalOk = () => {
-    console.log("กดตกลงแล้ว");
-    console.log("modal.type =", modal.type);
-    console.log("activity id =", id);
-
     if (modal.type === "success") {
-      const targetUrl = `http://localhost:5173/activities/${id}/registrations`;
-
-      console.log("กำลังไป =", targetUrl);
-
-      window.location.replace(targetUrl);
-
+      navigate(`/activities/${id}/registrations`);
       return;
     }
 
