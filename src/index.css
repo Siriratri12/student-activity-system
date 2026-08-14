@@ -1,0 +1,397 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+button {
+  font: inherit;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 64px;
+}
+
+.page-header {
+  margin-bottom: 40px;
+}
+
+.page-header__eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #2563eb;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.2;
+}
+
+.page-header p:last-child {
+  margin: 12px 0 0;
+  color: #667085;
+  font-size: 17px;
+}
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity-section__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.activity-section__top h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.activity-section__top span {
+  color: #667085;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.activity-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.1);
+}
+
+.activity-card__image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.activity-card__body {
+  padding: 20px;
+}
+
+.activity-card__category {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.activity-card__title {
+  display: -webkit-box;
+  margin: 14px 0;
+  font-size: 20px;
+  line-height: 1.45;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.activity-card__info {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.activity-card__info p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.activity-card__info svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.activity-card__button {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: #003366;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.activity-card__button:hover {
+  background: #134c84;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-panel {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 16px;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+}
+
+.search-box svg {
+  flex-shrink: 0;
+  color: #667085;
+}
+
+.search-box input {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  color: #172033;
+}
+
+.search-box:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.search-clear {
+  display: grid;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f4f7;
+  color: #667085;
+  cursor: pointer;
+}
+
+.filter-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-box label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #344054;
+}
+
+.filter-box select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+  outline: none;
+}
+
+.filter-box select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination__button,
+.pagination__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  color: #344054;
+  cursor: pointer;
+}
+
+.pagination__button {
+  gap: 6px;
+  padding: 0 14px;
+  border-radius: 10px;
+}
+
+.pagination__number {
+  width: 40px;
+  border-radius: 10px;
+}
+
+.pagination__number--active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-message {
+  display: grid;
+  min-height: 300px;
+  place-items: center;
+  color: #667085;
+}
+
+.status-message--error {
+  color: #dc2626;
+}
+
+.retry-button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 18px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .activity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .search-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    width: min(100% - 24px, 520px);
+    padding: 28px 0 48px;
+  }
+
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-card__image {
+    height: 190px;
+  }
+
+  .activity-section__top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .pagination__button {
+    padding: 0 10px;
+    font-size: 0;
+  }
+
+  .pagination__button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .pagination__pages {
+    gap: 4px;
+  }
+
+  .pagination__number {
+    width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* เพิ่มส่วนนี้ต่อท้ายไฟล์ index.css ของคุณ */
+.registration-page {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.registration-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  padding: 36px;
+}

@@ -1,0 +1,1111 @@
+/* ============================================================
+   ระบบกิจกรรมพัฒนานักศึกษา — Theme: Navy / Sky / Slate / Violet
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap");
+
+:root {
+  /* ---- Color tokens ---- */
+  --void: #0b1220; /* เกือบดำ อมน้ำเงิน */
+  --ink: #10182d; /* ตัวอักษรหลัก */
+  --ink-soft: #4b5876; /* ตัวอักษรรอง (เทา-น้ำเงิน) */
+  --ink-faint: #8792ab; /* ตัวอักษรจาง */
+
+  --cloud: #f4f6fc; /* พื้นหลังหน้า */
+  --mist: #e7ebf6; /* เส้นขอบ/พื้นผิวรอง */
+  --surface: #ffffff; /* การ์ด/พื้นผิวหลัก */
+
+  --blue-900: #101a4a;
+  --blue-700: #2340d6;
+  --blue-600: #3a5bef;
+  --blue-500: #557bff;
+  --blue-100: #e4eaff;
+
+  --sky-500: #4fb2ff;
+  --sky-100: #e2f3ff;
+
+  --violet-600: #7b4dff;
+  --violet-500: #9a6bff;
+  --violet-100: #efe8ff;
+
+  --slate-500: #64708a;
+  --slate-300: #c3cbdd;
+  --slate-100: #eef1f8;
+
+  --danger: #d5405f;
+  --danger-100: #fde8ec;
+
+  /* ---- Gradients ---- */
+  --grad-primary: linear-gradient(
+    135deg,
+    var(--blue-700) 0%,
+    var(--violet-600) 100%
+  );
+  --grad-hero: linear-gradient(
+    160deg,
+    var(--blue-900) 0%,
+    #1a2470 45%,
+    var(--violet-600) 130%
+  );
+  --grad-badge: linear-gradient(120deg, var(--sky-500), var(--blue-600));
+
+  /* ---- Type ---- */
+  --font-display: "Kanit", "IBM Plex Sans Thai", sans-serif;
+  --font-body: "IBM Plex Sans Thai", "Kanit", sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Sans Thai", monospace;
+
+  /* ---- Elevation ---- */
+  --shadow-sm:
+    0 1px 2px rgba(16, 24, 45, 0.06), 0 1px 3px rgba(16, 24, 45, 0.08);
+  --shadow-md:
+    0 6px 18px rgba(21, 33, 92, 0.1), 0 2px 6px rgba(21, 33, 92, 0.06);
+  --shadow-lg: 0 20px 45px rgba(16, 24, 66, 0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cloud);
+  background-image:
+    radial-gradient(circle at 8% 0%, var(--blue-100) 0%, transparent 45%),
+    radial-gradient(circle at 100% 10%, var(--violet-100) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--blue-900);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--violet-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   Layout shell
+   ============================================================ */
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px 96px;
+}
+
+/* ============================================================
+   Back button
+   ============================================================ */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 18px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+  margin-bottom: 28px;
+}
+
+.back-button:hover {
+  background: var(--blue-100);
+  box-shadow: var(--shadow-md);
+  transform: translateX(-2px);
+}
+
+/* ============================================================
+   Page header
+   ============================================================ */
+
+.page-header {
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--mist);
+}
+
+.page-header__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--violet-600);
+  background: var(--violet-100);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  max-width: 60ch;
+}
+
+/* ============================================================
+   Search + filter panel
+   ============================================================ */
+
+.search-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.search-box {
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 4px var(--blue-100);
+}
+
+.search-box svg {
+  color: var(--slate-500);
+  flex-shrink: 0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.search-box input::placeholder {
+  color: var(--ink-faint);
+}
+
+.search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: var(--slate-100);
+  color: var(--slate-500);
+  flex-shrink: 0;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.search-clear:hover {
+  background: var(--danger-100);
+  color: var(--danger);
+}
+
+.filter-box {
+  flex: 0 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-box label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+
+.filter-box select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--ink);
+  padding: 2px 0 4px;
+}
+
+/* ============================================================
+   Activity section (grid header + status states)
+   ============================================================ */
+
+.activity-section__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.activity-section__top h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.activity-section__top span {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--blue-700);
+  background: var(--blue-100);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.status-message {
+  text-align: center;
+  padding: 56px 24px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.status-message--error {
+  background: var(--danger-100);
+  border-color: #f6c3cf;
+  color: #9c1d3a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.retry-button {
+  border: none;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.retry-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 72px 24px;
+  background: var(--surface);
+  border: 1px dashed var(--slate-300);
+  border-radius: var(--radius-md);
+}
+
+.empty-state__icon {
+  font-size: 2.4rem;
+  margin-bottom: 14px;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   Activity grid + card
+   (ActivityCard.jsx ไม่ได้แนบมา — สไตล์นี้อิงคลาสมาตรฐาน
+   ตามที่ activity-card__category ถูกใช้ร่วมในไฟล์อื่น
+   ปรับ selector ได้ถ้าโครงสร้างจริงต่างจากนี้)
+   ============================================================ */
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.activity-card {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--mist);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* รอยปรุแบบตั๋วอีเวนต์ — signature element */
+.activity-card::before,
+.activity-card::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: var(--cloud);
+  border-radius: 50%;
+  top: 158px;
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px var(--mist);
+}
+
+.activity-card::before {
+  left: -9px;
+}
+
+.activity-card::after {
+  right: -9px;
+}
+
+.activity-card img,
+.activity-card__image {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+  display: block;
+  background: var(--slate-100);
+}
+
+.activity-card__body,
+.activity-card__content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  border-top: 1px dashed var(--slate-300);
+}
+
+.activity-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--blue-900);
+  line-height: 1.4;
+}
+
+.activity-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.activity-card__footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.activity-card__cta,
+.activity-card__button {
+  border: none;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 9px 18px;
+  border-radius: 999px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.activity-card__cta:hover,
+.activity-card__button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ป้ายหมวดหมู่ — ใช้ร่วมกันหลายหน้า */
+.activity-card__category {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--grad-badge);
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+/* ============================================================
+   Pagination
+   ============================================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.pagination__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--mist);
+  background: var(--surface);
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 9px 16px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.pagination__button:hover:not(:disabled) {
+  background: var(--blue-100);
+}
+
+.pagination__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination__pages {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination__number {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--mist);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 50%;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.pagination__number:hover {
+  border-color: var(--blue-500);
+  color: var(--blue-700);
+}
+
+.pagination__number--active {
+  background: var(--grad-primary);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ============================================================
+   Activity detail page
+   ============================================================ */
+
+.activity-detail {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--mist);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.activity-detail__image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  background: var(--slate-100);
+}
+
+.activity-detail__content {
+  padding: 32px clamp(20px, 4vw, 44px) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.activity-detail__content h1 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.activity-detail__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  padding: 20px;
+  background: var(--cloud);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mist);
+}
+
+.activity-detail__info > div {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.activity-detail__info svg {
+  color: var(--violet-600);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.activity-detail__info strong {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.activity-detail__info p {
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.activity-detail__description h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.activity-detail__description p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.activity-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--mist);
+}
+
+.activity-detail__register {
+  border: none;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.activity-detail__register:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.activity-detail__participants {
+  border: 1px solid var(--mist);
+  background: var(--surface);
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 28px;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.activity-detail__participants:hover {
+  background: var(--blue-100);
+}
+
+@media (min-width: 760px) {
+  .activity-detail {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+
+  .activity-detail__image {
+    height: 100%;
+    min-height: 420px;
+  }
+}
+
+/* ============================================================
+   Registration page (ActivityRegister.jsx layout)
+   ============================================================ */
+
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.registration-page__activity {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  align-items: center;
+}
+
+.registration-page__image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  background: var(--slate-100);
+}
+
+.registration-page__activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registration-page__activity-content h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.registration-page__activity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.registration-page__activity-info p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.registration-page__activity-info svg {
+  color: var(--violet-600);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Registration form — variant A (registration-form__*)
+   ============================================================ */
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  padding: clamp(20px, 3vw, 32px);
+  box-shadow: var(--shadow-sm);
+}
+
+.registration-form__group,
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.registration-form__group label,
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  gap: 4px;
+}
+
+.registration-form__group label span,
+.form-group label span {
+  color: var(--danger);
+}
+
+.registration-form__group input,
+.form-group input {
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--cloud);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.registration-form__group input:focus,
+.form-group input:focus {
+  outline: none;
+  border-color: var(--blue-500);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px var(--blue-100);
+}
+
+.registration-form__group small {
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+}
+
+.registration-form__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .registration-form__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.registration-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--sky-100);
+  border: 1px solid var(--blue-100);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.registration-form__consent input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--blue-700);
+  flex-shrink: 0;
+}
+
+.registration-form__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+  padding-top: 8px;
+  border-top: 1px solid var(--mist);
+}
+
+.registration-form__cancel {
+  border: 1px solid var(--mist);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 12px 26px;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.registration-form__cancel:hover:not(:disabled) {
+  background: var(--slate-100);
+}
+
+.registration-form__submit,
+.submit-button {
+  border: none;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 12px 30px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.registration-form__submit:hover:not(:disabled),
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.registration-form__cancel:disabled,
+.registration-form__submit:disabled,
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* ============================================================
+   Registration form — variant B (RegistrationForm.jsx: form-page)
+   ============================================================ */
+
+.form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--mist);
+}
+
+.form-page__header h1 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.form-page__header p:last-child {
+  color: var(--blue-700);
+  font-weight: 600;
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.consent-box {
+  background: var(--sky-100);
+  border: 1px solid var(--blue-100);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.consent-box label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.consent-box input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--blue-700);
+  flex-shrink: 0;
+}
+
+.consent-box .form-error {
+  margin-top: 8px;
+  margin-left: 30px;
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.alert--success {
+  background: var(--sky-100);
+  border: 1px solid #a9defc;
+  color: var(--blue-900);
+}
+
+.alert--success svg {
+  color: var(--blue-600);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.alert--success strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.alert--error {
+  background: var(--danger-100);
+  border: 1px solid #f6c3cf;
+  color: #9c1d3a;
+}
+
+.alert--error svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Registrations list (ActivityRegistrations.jsx)
+   ============================================================ */
+
+.registration-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.registration-card {
+  background: var(--surface);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.registration-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.registration-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.registration-card__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.registration-card__header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.registration-card__header p {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--violet-600);
+}
+
+.registration-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--slate-300);
+}
+
+.registration-card__info p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.registration-card__info svg {
+  color: var(--slate-500);
+  flex-shrink: 0;
+}

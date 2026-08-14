@@ -1,0 +1,570 @@
+/* ============================================================
+   Navbar.css
+   Theme: PSU / Navy
+   ============================================================ */
+
+:root {
+  --primary-blue: #003366;
+  --text-blue: #003366;
+  --bg-white: #ffffff;
+
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.25s ease;
+
+  --font-family:
+    "Sarabun", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar-container {
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+
+  /* เพิ่มความสูง Navbar */
+  padding: 18px 32px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  color: #003366;
+
+  border-bottom: 1px solid #edf1f5;
+
+  box-shadow: var(--shadow);
+
+  font-family: var(--font-family);
+}
+
+.navbar-content {
+  width: 100%;
+  max-width: 1260px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  color: #003366;
+
+  text-decoration: none;
+
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+}
+
+.navbar-logo {
+  width: auto;
+  height: 48px;
+
+  display: block;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  line-height: 1.2;
+}
+
+.brand-title {
+  color: #003366;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  letter-spacing: 0.2px;
+
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  margin-top: 3px;
+
+  color: #31577f;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+/* ============================================================
+   DESKTOP MENU
+   ============================================================ */
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.navbar-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 12px 8px;
+
+  color: #475569;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.menu-icon {
+  flex-shrink: 0;
+
+  color: #64748b;
+
+  transition: color 0.2s ease;
+}
+
+/* เส้นใต้เมนู */
+
+.menu-item::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 3px;
+
+  border-radius: 999px 999px 0 0;
+
+  background: transparent;
+
+  transition: background 0.2s ease;
+}
+
+/* Hover */
+
+.menu-item:hover {
+  color: #003366;
+}
+
+.menu-item:hover .menu-icon {
+  color: #003366;
+}
+
+.menu-item:hover::after {
+  background: #94a3b8;
+}
+
+/* Active */
+
+.menu-item.active {
+  color: #003366;
+
+  font-weight: 700;
+}
+
+.menu-item.active .menu-icon {
+  color: #003366;
+}
+
+.menu-item.active::after {
+  background: #003366;
+}
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+
+.navbar-toggle {
+  display: none;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #003366;
+
+  cursor: pointer;
+}
+
+.navbar-mobile-overlay {
+  display: none;
+}
+
+/* ============================================================
+   MOBILE / TABLET
+   ============================================================ */
+
+@media (max-width: 800px) {
+  /* ==========================================================
+     NAVBAR MOBILE
+     ========================================================== */
+
+  .navbar-container {
+    position: sticky;
+    top: 0;
+
+    /* สูงขึ้นจากเดิม */
+    padding: 14px 14px;
+  }
+
+  .navbar-content {
+    position: relative;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+  /* ==========================================================
+     BRAND MOBILE
+     ========================================================== */
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+  }
+
+  .navbar-logo {
+    width: 76px;
+    height: auto;
+
+    display: block;
+
+    flex-shrink: 0;
+
+    object-fit: contain;
+  }
+
+  .brand-text-group {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .brand-title {
+    width: 100%;
+
+    overflow: hidden;
+
+    color: #003366;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    line-height: 1.25;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  .brand-subtitle {
+    width: 100%;
+
+    overflow: hidden;
+
+    margin-top: 2px;
+
+    color: #557493;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    line-height: 1.25;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+  }
+
+  /* ==========================================================
+     HAMBURGER MOBILE
+     ========================================================== */
+
+  .navbar-toggle {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    border: 1px solid #d7e2ec;
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #003366;
+
+    box-shadow: 0 2px 8px rgba(0, 51, 102, 0.06);
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .navbar-toggle:hover {
+    background: #f4f8fc;
+
+    border-color: #b9cad9;
+  }
+
+  /* เอาขอบ focus แปลก ๆ ของ browser ออก */
+
+  .navbar-toggle:focus {
+    outline: none;
+  }
+
+  .navbar-toggle:focus-visible {
+    outline: 2px solid rgba(0, 51, 102, 0.3);
+    outline-offset: 2px;
+  }
+
+  /* ==========================================================
+     MOBILE MENU
+     ========================================================== */
+
+  .navbar-menu {
+    position: absolute;
+
+    top: calc(100% + 10px);
+
+    left: 0;
+    right: 0;
+
+    z-index: 1002;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin: 0;
+    padding: 8px;
+
+    border: 1px solid #dce5ef;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.13);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px);
+
+    pointer-events: none;
+
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0.18s ease;
+  }
+
+  /* เปิดเมนู */
+
+  .navbar-menu--open {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+  }
+
+  .navbar-menu li {
+    width: 100%;
+  }
+
+  .menu-item {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    color: #526174;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+  }
+
+  .menu-item:hover {
+    background: #f4f8fc;
+
+    color: #003366;
+  }
+
+  .menu-item.active {
+    background: #eaf4ff;
+
+    color: #003366;
+  }
+
+  /* มือถือไม่ใช้เส้นใต้ */
+
+  .menu-item::after,
+  .menu-item.active::after {
+    display: none;
+  }
+
+  .menu-icon {
+    margin: 0;
+
+    flex-shrink: 0;
+  }
+
+  /* ==========================================================
+     OVERLAY
+     ========================================================== */
+
+  .navbar-mobile-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1001;
+
+    display: block;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+
+    background: rgba(15, 23, 42, 0.18);
+
+    cursor: default;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 430px) {
+  .navbar-container {
+    /* เพิ่มความสูงเล็กน้อย */
+    padding: 13px 12px;
+  }
+
+  .navbar-content {
+    gap: 9px;
+  }
+
+  .navbar-brand {
+    gap: 8px;
+  }
+
+  .navbar-logo {
+    width: 64px;
+    height: auto;
+  }
+
+  .brand-title {
+    font-size: 13px;
+  }
+
+  .brand-subtitle {
+    font-size: 9px;
+  }
+
+  .navbar-toggle {
+    width: 39px;
+    height: 39px;
+
+    border-radius: 10px;
+  }
+}

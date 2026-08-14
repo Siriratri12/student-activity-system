@@ -1,0 +1,594 @@
+/* ========================================
+   ACTIVITY DETAIL PAGE
+======================================== */
+
+.activity-detail-page {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 28px 16px 52px;
+
+  color: #1e293b;
+}
+
+/* ========================================
+   PAGE HEADER
+======================================== */
+
+.activity-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+/* ========================================
+   BACK BUTTON
+======================================== */
+
+.activity-back-icon {
+  display: grid;
+
+  place-items: center;
+
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  padding: 0;
+
+  border: 1px solid #d4dfeb;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #003366;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(0, 51, 102, 0.08);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.activity-back-icon:hover {
+  background: #003366;
+
+  color: #ffffff;
+
+  border-color: #003366;
+
+  transform: translateX(-2px);
+
+  box-shadow: 0 6px 16px rgba(0, 51, 102, 0.16);
+}
+
+.activity-back-icon:focus-visible {
+  outline: 3px solid rgba(0, 51, 102, 0.2);
+
+  outline-offset: 3px;
+}
+
+/* ========================================
+   HEADER LINE
+======================================== */
+
+.activity-heading__line {
+  width: 4px;
+  height: 62px;
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+
+  background: #003366;
+}
+
+/* ========================================
+   HEADER TEXT
+======================================== */
+
+.activity-heading__content {
+  min-width: 0;
+}
+
+.activity-heading__content h1 {
+  margin: 0;
+
+  color: #162238;
+
+  font-size: 34px;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.activity-heading__content p {
+  margin: 7px 0 0;
+
+  color: #6b7a90;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  line-height: 1.6;
+}
+
+/* ========================================
+   MAIN CARD
+======================================== */
+
+.activity-top-card {
+  padding: 32px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  box-shadow: 0 6px 24px rgba(0, 51, 102, 0.06);
+}
+
+/* ========================================
+   TOP LAYOUT
+======================================== */
+
+.activity-top-layout {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 36px;
+
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .activity-top-layout {
+    grid-template-columns:
+      minmax(0, 1.05fr)
+      minmax(0, 0.95fr);
+  }
+}
+
+/* ========================================
+   LEFT CONTENT
+======================================== */
+
+.activity-info-side {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* ========================================
+   CATEGORY BADGE
+======================================== */
+
+.activity-category-badge {
+  display: inline-flex;
+
+  width: fit-content;
+
+  padding: 6px 13px;
+
+  border-radius: 999px;
+
+  background: #edf5fb;
+
+  color: #003366;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* ========================================
+   TITLE
+======================================== */
+
+.activity-info-side h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 800;
+
+  line-height: 1.35;
+}
+
+/* ========================================
+   META LIST
+======================================== */
+
+.activity-meta-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  margin: 3px 0;
+}
+
+/* ========================================
+   META ROW
+======================================== */
+
+.meta-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+
+  padding: 9px 0;
+}
+
+/* ========================================
+   META ICON
+======================================== */
+
+.meta-icon {
+  display: grid;
+
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  border-radius: 12px;
+
+  background: #eaf3fa;
+
+  color: #003366;
+}
+
+/* ========================================
+   META CONTENT
+======================================== */
+
+.meta-content {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  gap: 2px;
+}
+
+.meta-label {
+  color: #8290a0;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.meta-content strong {
+  color: #26374a;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.activity-top-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 6px;
+}
+
+/* ========================================
+   REGISTER BUTTON
+======================================== */
+
+.btn-register {
+  min-height: 46px;
+
+  padding: 12px 24px;
+
+  border: 1px solid #003366;
+
+  border-radius: 12px;
+
+  background: #003366;
+
+  color: #ffffff;
+
+  font: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 14px rgba(0, 51, 102, 0.16);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-register:hover {
+  background: #004b80;
+
+  border-color: #004b80;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 8px 18px rgba(0, 51, 102, 0.2);
+}
+
+/* ========================================
+   PARTICIPANTS BUTTON
+======================================== */
+
+.btn-participants {
+  min-height: 46px;
+
+  padding: 12px 24px;
+
+  border: 1px solid #cbd8e4;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #003366;
+
+  font: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-participants:hover {
+  background: #f5f8fb;
+
+  border-color: #9eb5ca;
+
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   IMAGE
+======================================== */
+
+.activity-image-side {
+  overflow: hidden;
+
+  width: 100%;
+
+  height: 330px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 18px;
+
+  background: #f1f5f9;
+}
+
+.activity-image-side img {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.35s ease;
+}
+
+.activity-image-side:hover img {
+  transform: scale(1.025);
+}
+
+/* ========================================
+   DESCRIPTION INSIDE MAIN CARD
+======================================== */
+
+.activity-inner-description {
+  margin-top: 28px;
+
+  padding: 24px 26px;
+
+  border: 1px solid #dfe7ef;
+
+  border-radius: 16px;
+
+  background: #fbfcfd;
+}
+
+/* ========================================
+   DESCRIPTION TITLE
+======================================== */
+
+.activity-inner-description__title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+}
+
+.activity-inner-description__title span {
+  width: 4px;
+
+  height: 24px;
+
+  flex-shrink: 0;
+
+  border-radius: 999px;
+
+  background: #003366;
+}
+
+.activity-inner-description__title h2 {
+  margin: 0;
+
+  color: #1b2a3d;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* ========================================
+   DESCRIPTION TEXT
+======================================== */
+
+.activity-inner-description p {
+  margin: 0;
+
+  color: #4c5d70;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+
+  white-space: pre-line;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .activity-image-side {
+    height: 300px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .activity-detail-page {
+    padding: 20px 14px 40px;
+  }
+
+  .activity-heading {
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 23px;
+  }
+
+  .activity-back-icon {
+    width: 40px;
+
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .activity-heading__line {
+    height: 57px;
+  }
+
+  .activity-heading__content h1 {
+    font-size: 28px;
+  }
+
+  .activity-heading__content p {
+    margin-top: 5px;
+
+    font-size: 13px;
+  }
+
+  .activity-top-card {
+    padding: 20px;
+
+    border-radius: 19px;
+  }
+
+  .activity-top-layout {
+    gap: 24px;
+  }
+
+  .activity-info-side {
+    gap: 16px;
+  }
+
+  .activity-info-side h2 {
+    font-size: 25px;
+  }
+
+  .meta-row {
+    padding: 8px 0;
+  }
+
+  .activity-image-side {
+    height: 240px;
+
+    border-radius: 14px;
+  }
+
+  .activity-top-actions {
+    flex-direction: column;
+  }
+
+  .btn-register,
+  .btn-participants {
+    width: 100%;
+  }
+
+  .activity-inner-description {
+    margin-top: 22px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+  }
+
+  .activity-inner-description__title h2 {
+    font-size: 17px;
+  }
+
+  .activity-inner-description p {
+    font-size: 14px;
+  }
+}

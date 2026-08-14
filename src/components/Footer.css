@@ -1,0 +1,45 @@
+.site-footer {
+  width: 100%;
+  margin-top: auto;
+
+  background: #003366;
+  color: #ffffff;
+}
+
+.site-footer__inner {
+  width: 100%;
+  max-width: 1260px;
+
+  margin: 0 auto;
+  padding: 20px 20px;
+
+  box-sizing: border-box;
+}
+
+.site-footer p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 650px) {
+  .site-footer__inner {
+    padding: 16px;
+  }
+
+  .site-footer p {
+    font-size: 11px;
+  }
+
+  .site-footer p span {
+    display: block;
+    margin-top: 2px;
+  }
+}
