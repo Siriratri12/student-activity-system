@@ -1,7 +1,22 @@
+// src/services/api.js
+
 import axios from "axios";
 
+// ========================================
+// API BASE URL
+// ========================================
+//
+// Local:
+// VITE_API_URL=http://localhost:3001
+//
+// Production:
+// VITE_API_URL=https://your-api-url.com
+//
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 const api = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
   },
@@ -29,12 +44,8 @@ export const getActivity = async (id) => {
 // REGISTRATIONS
 // ========================================
 
-// ดึงผู้ลงทะเบียนของกิจกรรม
-//
-// ไม่ใช้ ?activityId=
-// เพราะ JSON Server ที่ใช้อยู่คืน [] เมื่อใช้ query นี้
-//
-// ดึงทั้งหมดก่อน แล้วกรองเอง
+// ดึงผู้ลงทะเบียนทั้งหมดก่อน
+// แล้วกรองเฉพาะ activityId ที่ต้องการ
 export const getRegistrations = async (activityId) => {
   const response = await api.get("/registrations");
 
@@ -44,10 +55,6 @@ export const getRegistrations = async (activityId) => {
     (registration) => String(registration.activityId) === String(activityId),
   );
 
-  console.log("กิจกรรมที่ต้องการ:", String(activityId));
-  console.log("ผู้ลงทะเบียนทั้งหมด:", registrations);
-  console.log("ผู้ลงทะเบียนของกิจกรรม:", filteredRegistrations);
-
   return {
     ...response,
     data: filteredRegistrations,
@@ -55,9 +62,11 @@ export const getRegistrations = async (activityId) => {
 };
 
 // ========================================
-// ตรวจสอบลงทะเบียนซ้ำ
+// CHECK DUPLICATE REGISTRATION
 // ========================================
 
+// ตรวจสอบว่า studentId นี้
+// ลงทะเบียนกิจกรรมนี้ไปแล้วหรือยัง
 export const checkRegistration = async (activityId, studentId) => {
   const response = await api.get("/registrations");
 
@@ -68,13 +77,6 @@ export const checkRegistration = async (activityId, studentId) => {
       String(registration.activityId) === String(activityId) &&
       String(registration.studentId) === String(studentId),
   );
-
-  console.log("ตรวจสอบลงทะเบียนซ้ำ:", {
-    activityId: String(activityId),
-    studentId: String(studentId),
-  });
-
-  console.log("ผลการตรวจสอบ:", existingRegistrations);
 
   return {
     ...response,
