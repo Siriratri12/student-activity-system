@@ -4,7 +4,7 @@
 
 ระบบเว็บไซต์สำหรับประชาสัมพันธ์กิจกรรมพัฒนานักศึกษา มหาวิทยาลัยสงขลานครินทร์ โดยผู้ใช้งานสามารถดูรายการกิจกรรม ค้นหาและกรองกิจกรรม ดูรายละเอียด ลงทะเบียนเข้าร่วมกิจกรรม และดูรายชื่อผู้ลงทะเบียนของแต่ละกิจกรรมได้
 
-โปรเจกต์นี้พัฒนาในรูปแบบ Front-end Proof of Concept (POC) และเชื่อมต่อกับ Mock REST API ที่ทำงานด้วย JSON Server
+โปรเจกต์นี้พัฒนาในรูปแบบ **Front-end Proof of Concept (POC)** และเชื่อมต่อกับ **Mock REST API** ที่ทำงานด้วย JSON Server
 
 ---
 
@@ -22,6 +22,34 @@
 
 ---
 
+## เว็บไซต์สำหรับทดสอบระบบ
+
+ระบบ Front-end ได้ Deploy ผ่าน Vercel และสามารถทดสอบการใช้งานได้ที่
+
+**Website:**  
+https://student-activity-system-ten.vercel.app/
+
+Mock REST API ได้ Deploy ผ่าน Render
+
+**Mock API:**  
+https://student-activity-system.onrender.com
+
+สามารถตรวจสอบข้อมูลจาก API ได้ที่
+
+```text
+https://student-activity-system.onrender.com/activities
+```
+
+และ
+
+```text
+https://student-activity-system.onrender.com/registrations
+```
+
+> **หมายเหตุ:** Mock API ใช้งานผ่าน Render Free Instance ซึ่งอาจเข้าสู่สถานะพักเมื่อไม่มีการใช้งานเป็นระยะเวลาหนึ่ง ดังนั้นการเปิดระบบครั้งแรกอาจใช้เวลาในการโหลดข้อมูลประมาณ 30–60 วินาที หลังจาก API เริ่มทำงานแล้ว ระบบจะสามารถใช้งานได้ตามปกติ
+
+---
+
 # วิธีรันระบบ
 
 ## สิ่งที่ต้องติดตั้งก่อนใช้งาน
@@ -30,19 +58,21 @@
 
 - Node.js
 - npm
+- Git
 
 สามารถตรวจสอบเวอร์ชันได้ด้วยคำสั่ง
 
 ```bash
 node -v
 npm -v
+git --version
 ```
 
 ---
 
 ## 1. ดาวน์โหลดโปรเจกต์
 
-กรณี Clone จาก Git Repository
+Clone โปรเจกต์จาก Git Repository
 
 ```bash
 git clone https://github.com/Siriratri12/student-activity-system.git
@@ -90,7 +120,7 @@ cd ..
 
 ## 4. รัน Mock API
 
-ในการใช้งานระบบจำเป็นต้องเปิด Mock API และ Front-end พร้อมกัน
+หากต้องการทดสอบระบบด้วย Mock API ภายในเครื่อง จำเป็นต้องเปิด Mock API และ Front-end พร้อมกัน
 
 แนะนำให้เปิด Terminal จำนวน 2 หน้าต่าง
 
@@ -126,7 +156,7 @@ http://localhost:3001/activities
 http://localhost:3001/registrations
 ```
 
-> กรุณาเปิด Mock API ไว้ระหว่างทดสอบระบบ Front-end
+> กรุณาเปิด Mock API ไว้ระหว่างทดสอบ Front-end ในกรณีที่ตั้งค่า Front-end ให้เชื่อมต่อกับ Local API
 
 ---
 
@@ -240,11 +270,7 @@ POST /registrations
 
 ## 4. รายชื่อผู้ลงทะเบียน (Activity Registrations)
 
-ผู้ใช้สามารถดูรายชื่อผู้ลงทะเบียนของแต่ละกิจกรรม โดยระบบเรียกข้อมูลจาก
-
-```text
-GET /registrations?activityId=:id
-```
+ผู้ใช้สามารถดูรายชื่อผู้ลงทะเบียนของแต่ละกิจกรรมได้ โดยระบบดึงข้อมูลการลงทะเบียนจาก Mock REST API และกรองข้อมูลตาม `activityId` ของกิจกรรมนั้น
 
 ข้อมูลที่แสดงประกอบด้วย
 
@@ -357,8 +383,6 @@ student-activity-system/
 │   ├── package.json
 │   └── README.md
 │
-├── node_modules/
-│
 ├── public/
 │
 ├── src/
@@ -366,15 +390,7 @@ student-activity-system/
 │   ├── assets/
 │   │   ├── 1.png
 │   │   ├── 2.png
-│   │   ├── 3.png
-│   │   ├── 4.png
-│   │   ├── 5.png
-│   │   ├── 6.png
-│   │   ├── 7.png
-│   │   ├── 8.png
-│   │   ├── 9.png
-│   │   ├── 10.png
-│   │   ├── 11.png
+│   │   ├── ...
 │   │   ├── 12.png
 │   │   ├── Branner.png
 │   │   ├── Branner2.png
@@ -425,28 +441,36 @@ student-activity-system/
 └── vite.config.js
 ```
 
-> หมายเหตุ: โฟลเดอร์ `node_modules` ไม่จำเป็นต้อง Commit ขึ้น Git Repository เนื่องจากสามารถติดตั้งใหม่ได้ด้วยคำสั่ง `npm install`
+> หมายเหตุ: โฟลเดอร์ `node_modules` ไม่ถูกจัดเก็บใน Git Repository เนื่องจากสามารถติดตั้งใหม่ได้ด้วยคำสั่ง `npm install`
 
 ---
 
 # REST API
 
-## Base URL
+## Local API
+
+สำหรับการทดสอบภายในเครื่อง
 
 ```text
 http://localhost:3001
 ```
 
+## Production Mock API
+
+สำหรับเว็บไซต์ที่ Deploy แล้ว
+
+```text
+https://student-activity-system.onrender.com
+```
+
 Endpoint หลักที่ระบบใช้งาน
 
-| Method | Endpoint                        | รายละเอียด                   |
-| ------ | ------------------------------- | ---------------------------- |
-| GET    | `/activities?_page=1&_limit=9`  | ดึงรายการกิจกรรมแบบแบ่งหน้า  |
-| GET    | `/activities?q=คำค้น`           | ค้นหากิจกรรม                 |
-| GET    | `/activities?category=ประเภท`   | กรองกิจกรรมตามประเภท         |
-| GET    | `/activities/:id`               | ดูรายละเอียดกิจกรรม          |
-| POST   | `/registrations`                | ลงทะเบียนเข้าร่วมกิจกรรม     |
-| GET    | `/registrations?activityId=:id` | ดูผู้ลงทะเบียนของกิจกรรมนั้น |
+| Method | Endpoint          | รายละเอียด               |
+| ------ | ----------------- | ------------------------ |
+| GET    | `/activities`     | ดึงรายการกิจกรรม         |
+| GET    | `/activities/:id` | ดูรายละเอียดกิจกรรม      |
+| GET    | `/registrations`  | ดึงข้อมูลผู้ลงทะเบียน    |
+| POST   | `/registrations`  | ลงทะเบียนเข้าร่วมกิจกรรม |
 
 ---
 
@@ -601,17 +625,17 @@ docs/User-Manual.pdf
 
 # หมายเหตุ
 
-โปรเจกต์นี้เป็น Front-end Proof of Concept (POC) สำหรับระบบกิจกรรมพัฒนานักศึกษา
+โปรเจกต์นี้เป็น **Front-end Proof of Concept (POC)** สำหรับระบบกิจกรรมพัฒนานักศึกษา
 
-ไม่มีการพัฒนา Back-end หรือฐานข้อมูลจริง โดยใช้ JSON Server เป็น Mock REST API สำหรับจำลองการรับและส่งข้อมูล
+ไม่มีการพัฒนา Back-end หรือฐานข้อมูลจริง โดยใช้ **JSON Server** เป็น Mock REST API สำหรับจำลองการรับและส่งข้อมูล
 
-ข้อมูลภายใน
+ข้อมูลสำหรับทดสอบระบบจัดเก็บอยู่ใน
 
 ```text
 mock-api/db.json
 ```
 
-ใช้สำหรับการทดสอบระบบ
+สำหรับการใช้งานบน Production ตัว Mock REST API ถูก Deploy ผ่าน Render และ Front-end ถูก Deploy ผ่าน Vercel
 
 ---
 
@@ -619,19 +643,8 @@ mock-api/db.json
 
 เอกสารที่จัดเตรียมไว้ภายใน Repository ประกอบด้วย
 
-| เอกสาร                 | ตำแหน่ง                |
+| เอกสาร                 | ตำแหน่ง                 |
 | ---------------------- | ---------------------- |
 | README                 | `README.md`            |
-| คู่มือการใช้งาน PDF    | `docs/User-Manual.pdf` |
+| คู่มือการใช้งาน PDF        | `docs/User-Manual.pdf` |
 | Mock API Documentation | `mock-api/README.md`   |
-
----
-
-## User Manual
-
-คู่มือการใช้งานสำหรับผู้ใช้ทั่วไปสามารถดูได้จาก
-
-```text
-docs/User-Manual.pdf
-```
-# student-activity-system
