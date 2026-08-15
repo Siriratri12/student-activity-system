@@ -183,6 +183,28 @@
       "consent": true,
       "registeredAt": "2026-08-13T21:36:32.302Z",
       "id": "R2JaeJopFEo"
+    },
+    {
+      "activityId": "1",
+      "fullName": "มีนา ดีใจ",
+      "studentId": "6712345611",
+      "faculty": "คณะวิทยาการจัดการ",
+      "email": "meena@psu.ac.th",
+      "phone": "0812345611",
+      "consent": true,
+      "registeredAt": "2026-08-14T21:32:27.207Z",
+      "id": "hOpfh8ckoeU"
+    },
+    {
+      "activityId": "4",
+      "fullName": "มานะ ดีใจ",
+      "studentId": "6789461233",
+      "faculty": "คณะวิศวกรรมศาสตร์",
+      "email": "mana@psu.ac.th",
+      "phone": "0987463213",
+      "consent": true,
+      "registeredAt": "2026-08-14T22:15:08.593Z",
+      "id": "uLrGzrhU58w"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock3, MapPin, Users } from "lucide-react";
 
 import { getActivity } from "../services/api";
+
 import "./ActivityDetail.css";
 
 function ActivityDetail() {
@@ -14,24 +15,41 @@ function ActivityDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchActivity = async () => {
-      try {
-        setLoading(true);
-        setError("");
+  // ========================================
+  // LOAD ACTIVITY
+  // ========================================
 
-        const response = await getActivity(id);
-        setActivity(response.data);
-      } catch (err) {
-        console.error("โหลดรายละเอียดกิจกรรมไม่สำเร็จ:", err);
-        setError("ไม่สามารถโหลดรายละเอียดกิจกรรมได้");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchActivity = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await getActivity(id);
+
+      setActivity(response.data);
+    } catch (err) {
+      console.error("โหลดรายละเอียดกิจกรรมไม่สำเร็จ:", err);
+
+      setError("ไม่สามารถโหลดรายละเอียดกิจกรรมได้ กรุณาลองใหม่อีกครั้ง");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!id) {
+      setError("ไม่พบรหัสกิจกรรม");
+      setLoading(false);
+
+      return;
+    }
 
     fetchActivity();
   }, [id]);
+
+  // ========================================
+  // LOADING
+  // ========================================
 
   if (loading) {
     return (
@@ -41,23 +59,41 @@ function ActivityDetail() {
     );
   }
 
+  // ========================================
+  // ERROR
+  // ========================================
+
   if (error || !activity) {
     return (
       <main className="activity-detail-page">
         <div className="status-message status-message--error">
           <p>{error || "ไม่พบกิจกรรมนี้"}</p>
 
-          <button
-            type="button"
-            className="retry-button"
-            onClick={() => navigate("/activities")}
-          >
-            กลับหน้ากิจกรรม
-          </button>
+          <div className="activity-error-actions">
+            <button
+              type="button"
+              className="retry-button"
+              onClick={fetchActivity}
+            >
+              ลองใหม่
+            </button>
+
+            <button
+              type="button"
+              className="activity-error-back"
+              onClick={() => navigate("/activities")}
+            >
+              กลับหน้ากิจกรรม
+            </button>
+          </div>
         </div>
       </main>
     );
   }
+
+  // ========================================
+  // DATE / TIME
+  // ========================================
 
   const date = new Date(activity.date);
 
@@ -72,16 +108,23 @@ function ActivityDetail() {
     minute: "2-digit",
   });
 
+  // ========================================
+  // UI
+  // ========================================
+
   return (
     <main className="activity-detail-page">
-      {/* Header */}
+      {/* ========================================
+          HEADER
+      ======================================== */}
+
       <section className="activity-heading">
         <button
           type="button"
           className="activity-back-icon"
-          onClick={() => navigate(-1)}
-          aria-label="ย้อนกลับ"
-          title="ย้อนกลับ"
+          onClick={() => navigate("/activities")}
+          aria-label="กลับหน้ารายการกิจกรรม"
+          title="กลับหน้ารายการกิจกรรม"
         >
           <ArrowLeft size={21} />
         </button>
@@ -95,16 +138,27 @@ function ActivityDetail() {
         </div>
       </section>
 
-      {/* Main Card */}
+      {/* ========================================
+          MAIN CARD
+      ======================================== */}
+
       <section className="activity-top-card">
         <div className="activity-top-layout">
-          {/* Left Side */}
+          {/* ========================================
+              LEFT SIDE
+          ======================================== */}
+
           <div className="activity-info-side">
-            <span className="activity-category-badge">{activity.category}</span>
+            <span className="activity-category-badge">
+              {activity.category || "กิจกรรม"}
+            </span>
 
             <h2>{activity.title}</h2>
 
-            {/* Activity Info */}
+            {/* ========================================
+                ACTIVITY META
+            ======================================== */}
+
             <div className="activity-meta-list">
               <div className="meta-row">
                 <div className="meta-icon">
@@ -113,6 +167,7 @@ function ActivityDetail() {
 
                 <div className="meta-content">
                   <span className="meta-label">วันที่</span>
+
                   <strong>{formattedDate}</strong>
                 </div>
               </div>
@@ -124,6 +179,7 @@ function ActivityDetail() {
 
                 <div className="meta-content">
                   <span className="meta-label">เวลา</span>
+
                   <strong>{formattedTime} น.</strong>
                 </div>
               </div>
@@ -135,7 +191,8 @@ function ActivityDetail() {
 
                 <div className="meta-content">
                   <span className="meta-label">สถานที่</span>
-                  <strong>{activity.location}</strong>
+
+                  <strong>{activity.location || "ไม่ระบุสถานที่"}</strong>
                 </div>
               </div>
 
@@ -146,12 +203,16 @@ function ActivityDetail() {
 
                 <div className="meta-content">
                   <span className="meta-label">จำนวนที่รับ</span>
-                  <strong>{activity.capacity} คน</strong>
+
+                  <strong>{activity.capacity || 0} คน</strong>
                 </div>
               </div>
             </div>
 
-            {/* Buttons */}
+            {/* ========================================
+                ACTION BUTTONS
+            ======================================== */}
+
             <div className="activity-top-actions">
               <button
                 type="button"
@@ -173,13 +234,27 @@ function ActivityDetail() {
             </div>
           </div>
 
-          {/* Right Side Image */}
+          {/* ========================================
+              RIGHT SIDE IMAGE
+          ======================================== */}
+
           <div className="activity-image-side">
-            <img src={activity.imageUrl} alt={activity.title} />
+            {activity.imageUrl ? (
+              <img src={activity.imageUrl} alt={activity.title} />
+            ) : (
+              <div className="activity-image-placeholder">
+                <Users size={40} />
+
+                <span>ไม่มีรูปภาพกิจกรรม</span>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Description inside Main Card */}
+        {/* ========================================
+            DESCRIPTION
+        ======================================== */}
+
         <section className="activity-inner-description">
           <div className="activity-inner-description__title">
             <span />
